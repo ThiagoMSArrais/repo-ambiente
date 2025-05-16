@@ -4,21 +4,27 @@ on:
 jobs:
     deploy-fake-homologacao:
         runs-on: ubuntu-latest
-        environment: homologacao
+        environment: 
+            name: homologacao
+            url: "https://homologacao.exemplo.com"
         steps:
             - name: Fake do deploy em ambiente
               run: echo "Deploy em ambiente ${{ vars.AMBIENTE_DEPLOY }}"
     teste-fake:
         runs-on: ubuntu-latest
         needs: [deploy-fake-homologacao]
-        environment: homologacao
+        environment: 
+            name: homologacao
+            url: "https://homologacao.exemplo.com"
         steps:
             - name: Fake do teste em ambiente
               run: echo "teste em ambiente ${{ vars.AMBIENTE_DEPLOY }}"
     deploy-fake-producao:
         runs-on: ubuntu-latest
         needs: [teste-fake]
-        environment: producao
+        environment: 
+            name: producao
+            url: "https://producao.exemplo.com"
         steps:
             - name: Fake do deploy em ambiente
               run: echo "Deploy em ambiente ${{ vars.AMBIENTE_DEPLOY }}"
